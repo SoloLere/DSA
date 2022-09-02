@@ -17,3 +17,8 @@ function swap (arr,a,b){
 };
 
 console.log(selectionSort([5,3,4,1]));
+
+/*
+Select the first element, loops through the array and find the smallest
+element and switch it with first, afterwards, move on to second
+*/

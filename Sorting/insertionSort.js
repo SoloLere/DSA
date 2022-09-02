@@ -29,3 +29,7 @@ function insertionSort(arr){
 
 console.log(insertionSort([11,3,6,1,7,10,-1]));
 
+/*
+Starting from second element, lookback at where it should be and insert it there
+*/
+
