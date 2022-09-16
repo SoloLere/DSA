@@ -25,3 +25,6 @@
 };
 
 console.log(isAnagram('nl', 'cx'));
+
+// I used an array O(N) space complexity
+// TC = O(26) == O(1);

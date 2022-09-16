@@ -103,9 +103,40 @@ class SinglyLinkedList{
             return cur;
         }
     }
+    reverse(){
+        if (!this.head || this.length === 1) return this;
+        else{
+            let node = this.head;
+            this.head = this.tail;
+            this.tail = node;
+            let next = null;
+            let prev = null;
+            while(node){
+                next = node.next;
+                node.next = prev;
+                prev = node;
+                node = next;                
+            }
+            return this;
+        }
+    }
+    print(){
+        let arr = [];
+        let node = this.head;
+        while (node){
+            arr.push(node.val);
+            node = node.next
+        }
+        console.log(arr);
+    }
 }
 
 var list = new SinglyLinkedList();
 list.push('Hello');
 list.push('Goodbye');
+list.push('solomon');
+list.push('Oseni');
 console.log(list);
+list.print();
+list.reverse();
+list.print();
