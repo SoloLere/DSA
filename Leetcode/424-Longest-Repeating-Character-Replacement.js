@@ -24,4 +24,9 @@
     return maxLen;
 };
 
-// I noticed that once i get a max, the length of my substring wouldn't reduce, it keeps increasing i.e if the MaxLen = 4, the lenght of the next substring will be 5, I'll check if the five can beat the four.
+/* 
+I noticed that once i get a max, the length of my substring wouldn't reduce, 
+it will be contanst at first, then increases afterwards. 
+i.e if the MaxLen = 4, the length of the next substring will be 4, then 5, 
+I'll check if the five can beat the four.
+*/
