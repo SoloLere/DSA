@@ -131,7 +131,30 @@ class BinarySearchTree {
         traverse(node);
         return data;
     }
-    
+    DFS_PostOrder(){
+        const data = [];
+        let node = this.root;
+        
+        function traverse(node){
+            if(node.left)  traverse(node.left);
+            if(node.right) traverse(node.right);
+            data.push(node.value)
+        }
+        traverse(node);
+        return data;
+    }
+    DFS_InOrder(){
+        const data = [];
+        let node = this.root;
+        
+        function traverse(node){
+            if(node.left)  traverse(node.left);
+            data.push(node.value)
+            if(node.right) traverse(node.right);
+        }
+        traverse(node);
+        return data;
+    }
 }
 
 /*
