@@ -1,62 +1,45 @@
-// Fruits into Baskets 
-
-// Brute Force Approach
-/* TC:O(N^2) : The outer loop will loop through through each element. O(N),the innerloop will loop also run on each element N times
-
-    SC:O(N^2) : I'll create an Hashmap N times and it will store N properties each time;
+/*
+Brute Force approach
+TC: O(N**2), SC: O(N)
 */
-// get all possible substrings
-// check if the unique elements are 2, if it is, maxLen = length
 
-
-function fruits(arr) {
-    let maxFruits = 0;
-    for (let left = 0; left < arr.length; left++){
-        let obj = {};
-        for(let right = left; right < arr.length; right++){
-            obj[arr[right]] = ++obj[arr[right]] || 1;
-            if (Object.keys(obj).length === 2 || (Object.keys(obj).length === 1 && obj[arr[right]] >= 1)){
-                maxFruits = Math.max(maxFruits, right - left + 1)
-            }
+var totalFruit = function(fruits) {
+    // get all possible substring
+    // find the max-len substring with at most 2 distict char
+    
+    let max = -Infinity;
+    for(let i = 0; i < fruits.length; i++){
+        let set = new Set();
+        for(let j = i; j < fruits.length; j++){
+            set.add(fruits[j]);
+            if(set.size > 2) break;
+            max = Math.max(max, j - i + 1);
         }
     }
-    return maxFruits;
-}
+    return max
+};
 
-
-// Sliding window Approach
-/* TC:O(N^2) : The outer loop will loop through through each element. O(N),the innerloop will also loop through each element once
-
-    SC:O(1) : I'll create an Hashmap once and it will store max of 3 properties at a time;
+/*
+Sliding window approach
+TC: O(N + N), SC: O(M): M = no. of fruits
 */
-function fruits(arr) {
-    let left = 0;
+
+var totalFruit = function(fruits) {
+    // check if number of distinct characters in current substring
+    // number of distinct characters > 2, reduce my window
+    // else keep increasing window
+    
+    let max = -Infinity;
     let obj = {};
-    let maxFruits = 0;
-
-    for (let right = 0; right < arr.length; right++){
-        currentFruit = arr[right];
-        if (obj[currentFruit]){
-            ++obj[currentFruit];
-        }else{
-            obj[currentFruit] = 1;
-        }
-
-        while (Object.keys(obj).length > 2){
-            leftmostFruit = arr[left];
-            obj[leftmostFruit] -= 1;
-            left++;
-            if (obj[leftmostFruit] === 0){
-                delete obj[leftmostFruit];
-            }
-        }
-
-        maxFruits = Math.max(maxFruits, right - left + 1);
+    let l = 0;
+    for(let r = 0; r < fruits.length; r++){
+        obj[fruits[r]] = ++obj[fruits[r]] || 1;
         
+        while (Object.keys(obj).length > 2) {
+            obj[fruits[l]] > 1 ? --obj[fruits[l]] : delete obj[fruits[l]];
+            l++;
+        }
+        max = Math.max(max, r - l + 1)
     }
-    return maxFruits;
-}
-
-// ['A', 'B', 'C', 'B', 'B', 'C']
-// ['A', 'B', 'C', 'A', 'C']
-fruits(['A', 'B', 'C', 'A', 'C']);
+    return max
+};
