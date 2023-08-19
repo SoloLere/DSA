@@ -62,3 +62,28 @@ var longestOnes = function(nums, k) {
     
     return length;
 };
+
+// similar to 424: longest repeating character replacement
+
+var longestOnes = function(nums, k) {
+    let l = 0;
+    let max = 0;
+    let max_one = 0;
+
+    for(let i = 0; i < nums.length; i++){
+        if (nums[i] === 1) max_one++
+
+        while ((i - l + 1) - max_one > k){
+            // shrink
+            if(nums[l] === 1){
+                max_one--
+            }
+            l++
+        }
+
+        max = Math.max(max, i - l + 1)
+
+    }
+
+    return max
+};
