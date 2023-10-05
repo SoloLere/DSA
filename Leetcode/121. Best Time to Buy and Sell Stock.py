@@ -14,15 +14,21 @@ class Solution:
         
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        buy = 0
         maxProfit = 0
+        buy = 0
 
         for sell in range(1,len(prices)):
+            # when do i sell
+            # only when buy price is lesser than sell price
+            # I buy whenever I encounter a price cheaper than my previous buying price
+            # buy low sell high
+            # [8, 3, 6, 5, 1, 7]
+
             if prices[buy] > prices[sell]:
                 buy = sell
-            
-            else:
+
+            else: 
                 profit = prices[sell] - prices[buy]
-                maxProfit = max(maxProfit, profit)
-            
-        return maxProfit;
+                maxProfit = max(profit, maxProfit)
+
+        return maxProfit
