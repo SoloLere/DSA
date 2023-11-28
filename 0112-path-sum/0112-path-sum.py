@@ -8,8 +8,18 @@ class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         if not root:
             return False
-        if root.val == targetSum and not root.left and not root.right:
-            return True
-        return self.hasPathSum(root.left, targetSum - root.val) or self.hasPathSum(root.right, targetSum - root.val)
+        queue = [(root, targetSum)]
         
-        
+        while queue:
+            node, val = queue.pop()
+            
+            if node.val == val and not node.left and not node.right:
+                return True
+            
+            if node.left:
+                queue.append((node.left, val - node.val))
+                
+            if node.right:
+                queue.append((node.right, val - node.val))
+                
+        return False
